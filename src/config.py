@@ -6,13 +6,13 @@ OUTPUT_DIR = "outputs"
 DATA_CONFIG = {
     "n_samples": 50000,
     "radius": 500,
-    "test_size": 0.75,
+    "test_size": 0.5,
 }
 
 # Plot configurations
 PLOT_CONFIG = {
     "style": "white",
-    "font_scale": 0.75,
+    "font_scale": 2,
     "s": 20,
     "edgecolor": "none",
     "aspect": "equal",
