@@ -1,4 +1,3 @@
-from sklearn.cluster import DBSCAN
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
@@ -9,7 +8,7 @@ from sklearn.tree import DecisionTreeClassifier
 from tqdm import tqdm
 from xgboost import XGBClassifier
 
-from .config import MODEL_CONFIG
+from src.config import MODEL_CONFIG
 
 
 class YinYangClassifier:
@@ -82,8 +81,14 @@ def train_and_evaluate_models(X_train, X_test, y_train, y_test):
 
 
 if __name__ == "__main__":
-    from config import DATA_CONFIG
-    from data_generator import generate_yin_yang_data
+    import os
+    import sys
+
+    # Add the project root directory to the Python path
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+    from src.config import DATA_CONFIG
+    from src.data_generator import generate_yin_yang_data
 
     X_train, X_test, y_train, y_test = generate_yin_yang_data(**DATA_CONFIG)
     results = train_and_evaluate_models(X_train, X_test, y_train, y_test)

@@ -54,8 +54,14 @@ def generate_yin_yang_data(n_samples, radius, test_size=None, preprocess=False):
 
 
 if __name__ == "__main__":
-    from config import DATA_CONFIG
-    from visualization import scatter_plot
+    import os
+    import sys
+
+    # Add the project root directory to the Python path
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+    from src.config import DATA_CONFIG
+    from src.visualization import scatter_plot
 
     # Generate and visualize sample data
     _, X, _, y = generate_yin_yang_data(**DATA_CONFIG)

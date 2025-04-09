@@ -5,7 +5,7 @@ import numpy as np
 import seaborn as sns
 from tqdm import tqdm
 
-from .config import COLORS, OUTPUT_DIR, PLOT_CONFIG
+from src.config import COLORS, OUTPUT_DIR, PLOT_CONFIG
 
 
 def scatter_plot(X, y, title, filename=None, ax=None):
