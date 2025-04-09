@@ -65,4 +65,4 @@ if __name__ == "__main__":
 
     # Generate and visualize sample data
     _, X, _, y = generate_yin_yang_data(**DATA_CONFIG)
-    scatter_plot(X, y, title="Yin-Yang Data", filename="yin_yang_data.png")
+    scatter_plot(X, y, filename="yin_yang_data.png")

@@ -8,7 +8,7 @@ from tqdm import tqdm
 from src.config import COLORS, OUTPUT_DIR, PLOT_CONFIG
 
 
-def scatter_plot(X, y, title, filename=None, ax=None):
+def scatter_plot(X, y, title=None, filename=None, ax=None):
     sns.set_theme(
         style=PLOT_CONFIG["style"],
         font_scale=PLOT_CONFIG["font_scale"],
@@ -25,7 +25,8 @@ def scatter_plot(X, y, title, filename=None, ax=None):
         edgecolor=PLOT_CONFIG["edgecolor"],
     )
     ax.set_aspect(PLOT_CONFIG["aspect"], PLOT_CONFIG["adjust_aspect"])
-    ax.set_title(title)
+    if title:
+        ax.set_title(title)
     ax.axis(PLOT_CONFIG["axis"])
     ax.get_legend().remove()
     if filename:
