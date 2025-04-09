@@ -21,7 +21,8 @@ class YinYangClassifier:
     def _initialize_model(self):
         model_map = {
             "random_forest": RandomForestClassifier,
-            "mlp": MLPClassifier,
+            "mlp1": MLPClassifier,
+            "mlp2": MLPClassifier,
             "svm": SVC,
             "knn": KNeighborsClassifier,
             "logistic_regression": LogisticRegression,
@@ -54,16 +55,19 @@ def train_and_evaluate_models(X_train, X_test, y_train, y_test):
     for model_config in tqdm(MODEL_CONFIG, desc="Training models"):
         try:
             model_type = model_config["model_type"]
-            test_param = model_config["test_params"]
+            test_params = model_config["test_params"]
             kwargs = model_config["kwargs"]
-            model = YinYangClassifier(model_type, **kwargs)
+            model = YinYangClassifier(
+                model_type,
+                **test_params,
+                **kwargs,
+            )
             model.train(X_train, y_train)
             if model_type not in results:
                 results[model_type] = []
             results[model_type].append(
                 {
-                    "test_param_name": test_param,
-                    "test_param_value": kwargs[test_param],
+                    "test_params": test_params,
                     "accuracy": model.evaluate(X_test, y_test),
                     "model": model.model,
                 }

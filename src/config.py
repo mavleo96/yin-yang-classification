@@ -41,38 +41,56 @@ MODEL_CONFIG = [
     *[
         {
             "model_type": "random_forest",
-            "test_params": "max_depth",
+            "test_params": {
+                "max_depth": depth,
+            },
             "kwargs": {
                 "n_estimators": 50,
                 "random_state": 0,
-                "max_depth": depth,
             },
         }
         for depth in range(1, 10)
     ],
     *[
         {
-            "model_type": "mlp",
-            "test_params": "hidden_layer_sizes",
+            "model_type": "mlp1",
+            "test_params": {
+                "hidden_layer_sizes": (size,),
+            },
             "kwargs": {
                 "max_iter": 1000,
                 "random_state": 0,
                 "early_stopping": True,
                 "validation_fraction": 0.1,
-                "hidden_layer_sizes": (size,),
             },
         }
-        for size in range(1, 5)
+        for size in range(2, 13, 2)
+    ],
+    *[
+        {
+            "model_type": "mlp2",
+            "test_params": {
+                "hidden_layer_sizes": (size, size),
+            },
+            "kwargs": {
+                "max_iter": 1000,
+                "random_state": 0,
+                "early_stopping": True,
+                "validation_fraction": 0.1,
+            },
+        }
+        for size in range(2, 13, 2)
     ],
     *[
         {
             "model_type": "svm",
-            "test_params": "kernel",
+            "test_params": {
+                "kernel": kernel,
+                "C": C,
+            },
             "kwargs": {
                 "random_state": 0,
                 "probability": True,
-                "kernel": kernel,
-                "C": C,
             },
         }
         for kernel in ["rbf", "linear", "poly", "sigmoid"]
@@ -81,11 +99,12 @@ MODEL_CONFIG = [
     *[
         {
             "model_type": "knn",
-            "test_params": "n_neighbors",
+            "test_params": {
+                "n_neighbors": n_neighbors,
+            },
             "kwargs": {
                 "weights": "uniform",
                 "algorithm": "auto",
-                "n_neighbors": n_neighbors,
             },
         }
         for n_neighbors in range(1, 4)
@@ -93,11 +112,12 @@ MODEL_CONFIG = [
     *[
         {
             "model_type": "xgboost",
-            "test_params": "max_depth",
+            "test_params": {
+                "max_depth": max_depth,
+            },
             "kwargs": {
                 "n_estimators": 50,
                 "random_state": 0,
-                "max_depth": max_depth,
             },
         }
         for max_depth in range(1, 4)

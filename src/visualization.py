@@ -40,41 +40,74 @@ def scatter_plot(X, y, title, filename=None, ax=None):
 
 
 def generate_visualizations(results, X, y):
-    for model_name, result in tqdm(results.items(), desc="Generating visualizations"):
+    for model_type, results in tqdm(results.items(), desc="Generating visualizations"):
         # Calculate the number of rows and columns for subplots
-        n_plots = len(result)
+        n_plots = len(results)
         n_cols = min(3, n_plots) if n_plots != 4 else 2
         n_rows = (n_plots + n_cols - 1) // n_cols  # Ceiling division
 
         fig = plt.figure(figsize=(5 * n_cols, 5 * n_rows))
 
         for i, result_item in enumerate(
-            tqdm(result, desc=f"Generating visualizations for {model_name}")
+            tqdm(results, desc=f"Generating visualizations for {model_type}")
         ):
             model = result_item["model"]
-            test_param_name = result_item["test_param_name"]
-            test_param_value = result_item["test_param_value"]
+            test_params = result_item["test_params"]
             y_pred = model.predict(X)
             y_plot = np.where(y_pred == y, y, -1)
 
             ax = plt.subplot(n_rows, n_cols, i + 1)
+            title = plot_title(model_type, test_params)
             scatter_plot(
                 X,
                 y_plot,
-                f"{model_name} - {test_param_name}: {test_param_value}",
+                title,
                 ax=ax,
             )
-            ax.set_title(f"{model_name} - {test_param_name}: {test_param_value}")
 
         # Save the figure with all subplots
         plt.tight_layout()
         os.makedirs("outputs", exist_ok=True)
         plt.savefig(
-            f"outputs/{model_name}.png",
+            f"outputs/{model_type}.png",
             dpi=PLOT_CONFIG["dpi"],
             bbox_inches=PLOT_CONFIG["bbox_inches"],
         )
         plt.close()
+
+
+def plot_title(model_type, param_dict):
+    if model_type == "svm":
+        mapping = {
+            "linear": "Linear",
+            "rbf": "RBF",
+            "poly": "Polynomial",
+            "sigmoid": "Sigmoid",
+        }
+        title = f"{mapping[param_dict['kernel']]} Kernel with C {param_dict['C']}"
+        return title
+    elif model_type == "mlp1":
+        title = f"Single Layer Size {param_dict['hidden_layer_sizes'][0]}"
+        return title
+    elif model_type == "mlp2":
+        title = f"Two Layers Size {param_dict['hidden_layer_sizes'][0]}"
+        return title
+
+    title = ""
+    for key, value in param_dict.items():
+        if isinstance(key, str):
+            mapping = {
+                "max_depth": "Tree Depth",
+                "n_neighbors": "Number of Neighbors",
+                "C": "C",
+                "kernel": "Kernel",
+                "hidden_layer_sizes": "Hidden Layer Sizes",
+            }
+            key = mapping[key] if key in mapping else key.replace("_", " ").title()
+        elif isinstance(value, tuple):
+            value = ", ".join(map(str, value))
+        title += f"{key}: {value} "
+    return title.strip()
 
 
 # def plot_model_comparison(results, filename=None):
@@ -124,6 +157,5 @@ def generate_visualizations(results, X, y):
 #             facecolor=COLORS["background"],
 #             edgecolor="none",
 #             pad_inches=0.1,
-#             transparent=False,
 #         )
 #     plt.close()
