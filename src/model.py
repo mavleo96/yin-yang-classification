@@ -9,7 +9,7 @@ from sklearn.tree import DecisionTreeClassifier
 from tqdm import tqdm
 from xgboost import XGBClassifier
 
-from config import MODEL_CONFIG
+from .config import MODEL_CONFIG
 
 
 class YinYangClassifier:

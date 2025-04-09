@@ -5,7 +5,7 @@ import numpy as np
 import seaborn as sns
 from tqdm import tqdm
 
-from config import COLORS, OUTPUT_DIR, PLOT_CONFIG
+from .config import COLORS, OUTPUT_DIR, PLOT_CONFIG
 
 
 def scatter_plot(X, y, title, filename=None, ax=None):
@@ -33,7 +33,7 @@ def scatter_plot(X, y, title, filename=None, ax=None):
         plt.savefig(
             f"{OUTPUT_DIR}/{filename}",
             dpi=PLOT_CONFIG["dpi"],
-            bbox_inches="tight",
+            bbox_inches=PLOT_CONFIG["bbox_inches"],
         )
         plt.close()
     return ax
@@ -57,13 +57,12 @@ def generate_visualizations(results, X, y):
             y_pred = model.predict(X)
             y_plot = np.where(y_pred == y, y, -1)
 
-            # Create subplot
             ax = plt.subplot(n_rows, n_cols, i + 1)
             scatter_plot(
                 X,
                 y_plot,
                 f"{model_name} - {test_param_name}: {test_param_value}",
-                ax=ax,  # Pass the axes object
+                ax=ax,
             )
             ax.set_title(f"{model_name} - {test_param_name}: {test_param_value}")
 
@@ -73,13 +72,12 @@ def generate_visualizations(results, X, y):
         plt.savefig(
             f"outputs/{model_name}.png",
             dpi=PLOT_CONFIG["dpi"],
-            bbox_inches="tight",
+            bbox_inches=PLOT_CONFIG["bbox_inches"],
         )
         plt.close()
 
 
 # def plot_model_comparison(results, filename=None):
-#     """Plot comparison of model accuracies"""
 
 #     # Extract model names and accuracies
 #     model_names = list(results.keys())

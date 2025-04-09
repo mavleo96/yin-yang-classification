@@ -19,6 +19,7 @@ PLOT_CONFIG = {
     "adjust_aspect": "box",
     "axis": "off",
     "dpi": 300,
+    "bbox_inches": "tight",
 }
 
 
@@ -71,10 +72,11 @@ MODEL_CONFIG = [
                 "random_state": 0,
                 "probability": True,
                 "kernel": kernel,
-                "C": 1,
+                "C": C,
             },
         }
         for kernel in ["rbf", "linear", "poly", "sigmoid"]
+        for C in [0.1, 1, 10]
     ],
     *[
         {
@@ -87,19 +89,6 @@ MODEL_CONFIG = [
             },
         }
         for n_neighbors in range(1, 4)
-    ],
-    *[
-        {
-            "model_type": "logistic_regression",
-            "test_params": "C",
-            "kwargs": {
-                "max_iter": 1000,
-                "penalty": "l2",
-                "random_state": 0,
-                "C": C,
-            },
-        }
-        for C in [0.1, 1, 10]
     ],
     *[
         {
