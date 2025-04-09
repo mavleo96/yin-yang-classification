@@ -9,6 +9,8 @@ The Yin-Yang dataset presents a visually complex, non-linear classification chal
 
 <img src="outputs/yin_yang_data.png" alt="Yin-Yang Data" width="300">
 
+I also came across an interesting paper titled ["The Yin-Yang Dataset"](https://arxiv.org/pdf/2102.08211), which introduces a compact and balanced dataset designed to support research in biologically plausible error backpropagation and deep learning within spiking neural networks.
+
 ---
 
 ## Models and Results Visualization
