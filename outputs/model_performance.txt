@@ -1,0 +1,93 @@
+random_forest
+RandomForestClassifier(max_depth=1, n_estimators=50, random_state=0): 0.71516
+RandomForestClassifier(max_depth=2, n_estimators=50, random_state=0): 0.74268
+RandomForestClassifier(max_depth=3, n_estimators=50, random_state=0): 0.8148
+RandomForestClassifier(max_depth=4, n_estimators=50, random_state=0): 0.86812
+RandomForestClassifier(max_depth=5, n_estimators=50, random_state=0): 0.90472
+RandomForestClassifier(max_depth=6, n_estimators=50, random_state=0): 0.93044
+RandomForestClassifier(max_depth=7, n_estimators=50, random_state=0): 0.9472
+RandomForestClassifier(max_depth=8, n_estimators=50, random_state=0): 0.95488
+RandomForestClassifier(max_depth=9, n_estimators=50, random_state=0): 0.9772
+
+mlp1
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(2,), max_iter=1000,
+              random_state=0): 0.69348
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(4,), max_iter=1000,
+              random_state=0): 0.86244
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(6,), max_iter=1000,
+              random_state=0): 0.85452
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(8,), max_iter=1000,
+              random_state=0): 0.86684
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(10,), max_iter=1000,
+              random_state=0): 0.95208
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(12,), max_iter=1000,
+              random_state=0): 0.96604
+
+mlp2
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(2, 2), max_iter=1000,
+              random_state=0): 0.70156
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(4, 4), max_iter=1000,
+              random_state=0): 0.92768
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(6, 6), max_iter=1000,
+              random_state=0): 0.91592
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(8, 8), max_iter=1000,
+              random_state=0): 0.94748
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(10, 10), max_iter=1000,
+              random_state=0): 0.9716
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(12, 12), max_iter=1000,
+              random_state=0): 0.98392
+
+svm
+SVC(C=0.1, probability=True, random_state=0): 0.93956
+SVC(C=1, probability=True, random_state=0): 0.95888
+SVC(C=10, probability=True, random_state=0): 0.99132
+SVC(C=0.1, kernel='linear', probability=True, random_state=0): 0.68424
+SVC(C=1, kernel='linear', probability=True, random_state=0): 0.68412
+SVC(C=10, kernel='linear', probability=True, random_state=0): 0.68412
+SVC(C=0.1, kernel='poly', probability=True, random_state=0): 0.67368
+SVC(C=1, kernel='poly', probability=True, random_state=0): 0.67208
+SVC(C=10, kernel='poly', probability=True, random_state=0): 0.66928
+SVC(C=0.1, kernel='sigmoid', probability=True, random_state=0): 0.45448
+SVC(C=1, kernel='sigmoid', probability=True, random_state=0): 0.46748
+SVC(C=10, kernel='sigmoid', probability=True, random_state=0): 0.47172
+
+knn
+KNeighborsClassifier(n_neighbors=1): 0.98868
+KNeighborsClassifier(n_neighbors=2): 0.986
+KNeighborsClassifier(n_neighbors=3): 0.98816
+
+xgboost
+XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=None, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=None, feature_types=None,
+              feature_weights=None, gamma=None, grow_policy=None,
+              importance_type=None, interaction_constraints=None,
+              learning_rate=None, max_bin=None, max_cat_threshold=None,
+              max_cat_to_onehot=None, max_delta_step=None, max_depth=1,
+              max_leaves=None, min_child_weight=None, missing=nan,
+              monotone_constraints=None, multi_strategy=None, n_estimators=50,
+              n_jobs=None, num_parallel_tree=None, ...): 0.8464
+XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=None, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=None, feature_types=None,
+              feature_weights=None, gamma=None, grow_policy=None,
+              importance_type=None, interaction_constraints=None,
+              learning_rate=None, max_bin=None, max_cat_threshold=None,
+              max_cat_to_onehot=None, max_delta_step=None, max_depth=2,
+              max_leaves=None, min_child_weight=None, missing=nan,
+              monotone_constraints=None, multi_strategy=None, n_estimators=50,
+              n_jobs=None, num_parallel_tree=None, ...): 0.94648
+XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=None, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=None, feature_types=None,
+              feature_weights=None, gamma=None, grow_policy=None,
+              importance_type=None, interaction_constraints=None,
+              learning_rate=None, max_bin=None, max_cat_threshold=None,
+              max_cat_to_onehot=None, max_delta_step=None, max_depth=3,
+              max_leaves=None, min_child_weight=None, missing=nan,
+              monotone_constraints=None, multi_strategy=None, n_estimators=50,
+              n_jobs=None, num_parallel_tree=None, ...): 0.97192
+
