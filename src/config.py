@@ -23,15 +23,15 @@ PLOT_CONFIG = {
 }
 
 
-# Color configurations - High contrast color palette organized by class
+# Color configurations
 COLORS = {
     "class_colors": {
         -1: "#2B2D42",  # Dark blue-gray for misclassifications
-        0: "#FF6B6B",  # Coral red for class 0
-        1: "#4ECDC4",  # Turquoise for class 1
-        2: "#FFD166",  # Bright yellow for class 2
-        3: "#06D6A0",  # Emerald green for class 3
-        4: "#118AB2",  # Ocean blue for class 4
+        0: "#FF6B6B",  # Coral red for outside the main circle
+        1: "#4ECDC4",  # Turquoise for small top circle
+        2: "#FFD166",  # Bright yellow for small bottom circle
+        3: "#06D6A0",  # Emerald green for right section
+        4: "#118AB2",  # Ocean blue for left section
     },
 }
 
