@@ -1,9 +1,29 @@
-import numpy as np
-from matplotlib.colors import ListedColormap
+# Output directory
+OUTPUT_DIR = "outputs"
+
+
+# Data generation configurations
+DATA_CONFIG = {
+    "n_samples": 50000,
+    "radius": 500,
+    "test_size": 0.75,
+}
+
+# Plot configurations
+PLOT_CONFIG = {
+    "style": "white",
+    "font_scale": 0.75,
+    "s": 20,
+    "edgecolor": "none",
+    "aspect": "equal",
+    "adjust_aspect": "box",
+    "axis": "off",
+    "dpi": 300,
+}
+
 
 # Color configurations - High contrast color palette organized by class
 COLORS = {
-    "background": "#FFFFFF",  # Pure white background
     "class_colors": {
         -1: "#2B2D42",  # Dark blue-gray for misclassifications
         0: "#FF6B6B",  # Coral red for class 0
@@ -12,34 +32,85 @@ COLORS = {
         3: "#06D6A0",  # Emerald green for class 3
         4: "#118AB2",  # Ocean blue for class 4
     },
-    "text": "#2B2D42",  # Dark blue-gray text color
-    "grid": "#E0E0E0",  # Light gray grid color
 }
 
 
-# Create colormaps
-def create_class_colormap(n_classes):
-    """Create a colormap for classes including misclassification color"""
-    colors = [COLORS["class_colors"][-1]]  # Start with misclassification color
-    for i in range(n_classes):
-        colors.append(COLORS["class_colors"][i])
-    return ListedColormap(colors)
-
-
-# Plot configurations
-PLOT_CONFIG = {
-    "figsize": (10, 8),
-    "dpi": 300,
-    "alpha": 0.6,
-    "grid_alpha": 0.3,
-    "fontsize": {"title": 16, "label": 14, "tick": 12},
-    "font_family": "sans-serif",  # Modern sans-serif font
-}
-
-# Data generation configurations
-DATA_CONFIG = {
-    "n_samples": 200000,  # Doubled from 100000 for much higher density
-    "radius": 500,
-    "test_size": 0.2,
-    "random_state": 42,
-}
+# Model configurations
+MODEL_CONFIG = [
+    *[
+        {
+            "model_type": "random_forest",
+            "test_params": "max_depth",
+            "kwargs": {
+                "n_estimators": 50,
+                "random_state": 0,
+                "max_depth": depth,
+            },
+        }
+        for depth in range(1, 10)
+    ],
+    *[
+        {
+            "model_type": "mlp",
+            "test_params": "hidden_layer_sizes",
+            "kwargs": {
+                "max_iter": 1000,
+                "random_state": 0,
+                "early_stopping": True,
+                "validation_fraction": 0.1,
+                "hidden_layer_sizes": (size,),
+            },
+        }
+        for size in range(1, 5)
+    ],
+    *[
+        {
+            "model_type": "svm",
+            "test_params": "kernel",
+            "kwargs": {
+                "random_state": 0,
+                "probability": True,
+                "kernel": kernel,
+                "C": 1,
+            },
+        }
+        for kernel in ["rbf", "linear", "poly", "sigmoid"]
+    ],
+    *[
+        {
+            "model_type": "knn",
+            "test_params": "n_neighbors",
+            "kwargs": {
+                "weights": "uniform",
+                "algorithm": "auto",
+                "n_neighbors": n_neighbors,
+            },
+        }
+        for n_neighbors in range(1, 4)
+    ],
+    *[
+        {
+            "model_type": "logistic_regression",
+            "test_params": "C",
+            "kwargs": {
+                "max_iter": 1000,
+                "penalty": "l2",
+                "random_state": 0,
+                "C": C,
+            },
+        }
+        for C in [0.1, 1, 10]
+    ],
+    *[
+        {
+            "model_type": "xgboost",
+            "test_params": "max_depth",
+            "kwargs": {
+                "n_estimators": 50,
+                "random_state": 0,
+                "max_depth": max_depth,
+            },
+        }
+        for max_depth in range(1, 4)
+    ],
+]
