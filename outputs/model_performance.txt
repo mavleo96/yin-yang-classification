@@ -5,56 +5,56 @@ RandomForestClassifier(max_depth=3, n_estimators=50, random_state=0): 0.8148
 RandomForestClassifier(max_depth=4, n_estimators=50, random_state=0): 0.86812
 RandomForestClassifier(max_depth=5, n_estimators=50, random_state=0): 0.90472
 RandomForestClassifier(max_depth=6, n_estimators=50, random_state=0): 0.93044
-RandomForestClassifier(max_depth=7, n_estimators=50, random_state=0): 0.9472
+RandomForestClassifier(max_depth=7, n_estimators=50, random_state=0): 0.94708
 RandomForestClassifier(max_depth=8, n_estimators=50, random_state=0): 0.95488
-RandomForestClassifier(max_depth=9, n_estimators=50, random_state=0): 0.9772
+RandomForestClassifier(max_depth=9, n_estimators=50, random_state=0): 0.9774
 
 mlp1
-MLPClassifier(early_stopping=True, hidden_layer_sizes=(2,), max_iter=1000,
-              random_state=0): 0.69348
-MLPClassifier(early_stopping=True, hidden_layer_sizes=(4,), max_iter=1000,
-              random_state=0): 0.86244
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(3,), max_iter=1000,
+              random_state=0): 0.68488
 MLPClassifier(early_stopping=True, hidden_layer_sizes=(6,), max_iter=1000,
-              random_state=0): 0.85452
-MLPClassifier(early_stopping=True, hidden_layer_sizes=(8,), max_iter=1000,
-              random_state=0): 0.86684
-MLPClassifier(early_stopping=True, hidden_layer_sizes=(10,), max_iter=1000,
-              random_state=0): 0.95208
+              random_state=0): 0.68432
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(9,), max_iter=1000,
+              random_state=0): 0.68508
 MLPClassifier(early_stopping=True, hidden_layer_sizes=(12,), max_iter=1000,
-              random_state=0): 0.96604
+              random_state=0): 0.69196
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(15,), max_iter=1000,
+              random_state=0): 0.9016
+MLPClassifier(early_stopping=True, hidden_layer_sizes=(18,), max_iter=1000,
+              random_state=0): 0.9388
 
 mlp2
 MLPClassifier(early_stopping=True, hidden_layer_sizes=(2, 2), max_iter=1000,
-              random_state=0): 0.70156
+              random_state=0): 0.68544
 MLPClassifier(early_stopping=True, hidden_layer_sizes=(4, 4), max_iter=1000,
-              random_state=0): 0.92768
+              random_state=0): 0.87528
 MLPClassifier(early_stopping=True, hidden_layer_sizes=(6, 6), max_iter=1000,
-              random_state=0): 0.91592
+              random_state=0): 0.68408
 MLPClassifier(early_stopping=True, hidden_layer_sizes=(8, 8), max_iter=1000,
-              random_state=0): 0.94748
+              random_state=0): 0.95272
 MLPClassifier(early_stopping=True, hidden_layer_sizes=(10, 10), max_iter=1000,
-              random_state=0): 0.9716
+              random_state=0): 0.9644
 MLPClassifier(early_stopping=True, hidden_layer_sizes=(12, 12), max_iter=1000,
-              random_state=0): 0.98392
+              random_state=0): 0.96676
 
 svm
-SVC(C=0.1, probability=True, random_state=0): 0.93956
+SVC(C=0.1, probability=True, random_state=0): 0.93968
 SVC(C=1, probability=True, random_state=0): 0.95888
-SVC(C=10, probability=True, random_state=0): 0.99132
-SVC(C=0.1, kernel='linear', probability=True, random_state=0): 0.68424
-SVC(C=1, kernel='linear', probability=True, random_state=0): 0.68412
+SVC(C=10, probability=True, random_state=0): 0.99128
+SVC(C=0.1, kernel='linear', probability=True, random_state=0): 0.684
+SVC(C=1, kernel='linear', probability=True, random_state=0): 0.6842
 SVC(C=10, kernel='linear', probability=True, random_state=0): 0.68412
-SVC(C=0.1, kernel='poly', probability=True, random_state=0): 0.67368
+SVC(C=0.1, kernel='poly', probability=True, random_state=0): 0.67316
 SVC(C=1, kernel='poly', probability=True, random_state=0): 0.67208
-SVC(C=10, kernel='poly', probability=True, random_state=0): 0.66928
-SVC(C=0.1, kernel='sigmoid', probability=True, random_state=0): 0.45448
-SVC(C=1, kernel='sigmoid', probability=True, random_state=0): 0.46748
-SVC(C=10, kernel='sigmoid', probability=True, random_state=0): 0.47172
+SVC(C=10, kernel='poly', probability=True, random_state=0): 0.66948
+SVC(C=0.1, kernel='sigmoid', probability=True, random_state=0): 0.45408
+SVC(C=1, kernel='sigmoid', probability=True, random_state=0): 0.46772
+SVC(C=10, kernel='sigmoid', probability=True, random_state=0): 0.47124
 
 knn
-KNeighborsClassifier(n_neighbors=1): 0.98868
-KNeighborsClassifier(n_neighbors=2): 0.986
-KNeighborsClassifier(n_neighbors=3): 0.98816
+KNeighborsClassifier(n_neighbors=1): 0.98872
+KNeighborsClassifier(n_neighbors=2): 0.98604
+KNeighborsClassifier(n_neighbors=3): 0.9882
 
 xgboost
 XGBClassifier(base_score=None, booster=None, callbacks=None,
@@ -90,4 +90,19 @@ XGBClassifier(base_score=None, booster=None, callbacks=None,
               max_leaves=None, min_child_weight=None, missing=nan,
               monotone_constraints=None, multi_strategy=None, n_estimators=50,
               n_jobs=None, num_parallel_tree=None, ...): 0.97192
+
+naive_bayes
+GaussianNB(): 0.76224
+
+kmeans
+KMeans(n_clusters=3, random_state=0): 0.08136
+KMeans(n_clusters=4, random_state=0): 0.2594
+KMeans(n_clusters=5, random_state=0): 0.3692
+KMeans(n_clusters=6, random_state=0): 0.3202
+KMeans(n_clusters=7, random_state=0): 0.2832
+
+dbscan
+DBSCAN(eps=0.1): 0.21696
+DBSCAN(eps=0.2): 0.21696
+DBSCAN(eps=0.3): 0.21696
 

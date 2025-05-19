@@ -5,7 +5,6 @@ OUTPUT_DIR = "outputs"
 # Data generation configurations
 DATA_CONFIG = {
     "n_samples": 50000,
-    "radius": 500,
     "test_size": 0.5,
 }
 
@@ -64,7 +63,7 @@ MODEL_CONFIG = [
                 "validation_fraction": 0.1,
             },
         }
-        for size in range(2, 13, 2)
+        for size in range(3, 19, 3)
     ],
     *[
         {
@@ -121,5 +120,34 @@ MODEL_CONFIG = [
             },
         }
         for max_depth in range(1, 4)
+    ],
+    *[
+        {
+            "model_type": "naive_bayes",
+            "test_params": {},
+            "kwargs": {},
+        }
+    ],
+    *[
+        {
+            "model_type": "kmeans",
+            "test_params": {
+                "n_clusters": n_clusters,
+            },
+            "kwargs": {
+                "random_state": 0,
+            },
+        }
+        for n_clusters in range(3, 8)
+    ],
+    *[
+        {
+            "model_type": "dbscan",
+            "test_params": {
+                "eps": eps,
+            },
+            "kwargs": {},
+        }
+        for eps in [0.1, 0.2, 0.3]
     ],
 ]

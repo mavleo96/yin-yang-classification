@@ -54,7 +54,10 @@ def generate_visualizations(results, X, y):
         ):
             model = result_item["model"]
             test_params = result_item["test_params"]
-            y_pred = model.predict(X)
+            if hasattr(model, "predict"):
+                y_pred = model.predict(X)
+            else:
+                y_pred = model.fit_predict(X)
             y_plot = np.where(y_pred == y, y, -1)
 
             ax = plt.subplot(n_rows, n_cols, i + 1)
@@ -103,6 +106,8 @@ def plot_title(model_type, param_dict):
                 "C": "C",
                 "kernel": "Kernel",
                 "hidden_layer_sizes": "Hidden Layer Sizes",
+                "n_clusters": "Number of Clusters",
+                "eps": "Epsilon",
             }
             key = mapping[key] if key in mapping else key.replace("_", " ").title()
         elif isinstance(value, tuple):

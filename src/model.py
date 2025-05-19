@@ -1,6 +1,8 @@
+from sklearn.cluster import DBSCAN, KMeans
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
+from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
@@ -27,6 +29,9 @@ class YinYangClassifier:
             "logistic_regression": LogisticRegression,
             "decision_tree": DecisionTreeClassifier,
             "xgboost": XGBClassifier,
+            "naive_bayes": GaussianNB,
+            "kmeans": KMeans,
+            "dbscan": DBSCAN,
         }
 
         if self.model_type not in model_map:
@@ -42,7 +47,10 @@ class YinYangClassifier:
 
     def evaluate(self, X, y):
         try:
-            y_pred = self.model.predict(X)
+            if hasattr(self.model, "predict"):
+                y_pred = self.model.predict(X)
+            else:
+                y_pred = self.model.fit_predict(X)
             return accuracy_score(y, y_pred)
         except Exception as e:
             raise RuntimeError(f"Error evaluating {self.model_type} model: {str(e)}")

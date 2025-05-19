@@ -19,7 +19,7 @@ I also came across an interesting paper titled ["The Yin-Yang Dataset"](https://
 > _it ain't much but it's honest work_
 
 - **Configuration**: 50 trees, varying `max_depth` from 1 to 9
-- **Performance**: Captures most of the points in major classes at lower depths but is able to learn the complete distribution only at depth 9
+- **Performance**: Captures most of the points in major classes at lower depths but is able to learn the complete decision boundaries only at depth 9
 
 <img src="outputs/random_forest.png" alt="Random Forest" width="600">
 
@@ -38,7 +38,7 @@ I also came across an interesting paper titled ["The Yin-Yang Dataset"](https://
 ### Multi-Layer Perceptron (MLP)
 
 #### MLP with Single Hidden Layer
-- **Hidden Units**: 2 to 12
+- **Hidden Units**: 3 to 18
 - **Performance**: Starts with baseline performance at low hidden units but improves with more neurons. Still, single-layer MLPs struggle to perfectly model the Yin-Yang’s nested, twisting structure.
   
 <img src="outputs/mlp1.png" alt="MLP1" width="600">
@@ -72,5 +72,27 @@ I also came across an interesting paper titled ["The Yin-Yang Dataset"](https://
 
 ---
 
+### Gaussian Naive Bayes
+- **Performance**: Assumption that x and y contribute independently to the probability of a class breaks down in this dataset.
+
+<img src="outputs/naive_bayes.png" alt="Naive Bayes" width="200">
+
+---
+
+### K-Means
+- **Number of Clusters**: 3 to 7
+- **Performance**: Clustering algorithm not suitable for a highly non-linear classification problem. Accuracy is highest when number of clusters is equal to number of classes.
+
+<img src="outputs/kmeans.png" alt="K-Means" width="600">
+
+---
+
+### DBCSAN
+- **Epsilon**: 0.1 to 0.3
+- **Performance**: Density of points is similar throughtout dataset and hence this algorithm is highly unsuitable for this dataset.
+
+<img src="outputs/dbscan.png" alt="DBSCAN" width="600">
+
+---
 ## Installation and Usage
 See [INSTALL.md](INSTALL.md) for detailed installation and usage instructions.

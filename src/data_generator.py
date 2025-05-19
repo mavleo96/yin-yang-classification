@@ -1,47 +1,46 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+
+RADIUS = 0.5
 
 
-def is_in_top_circle(row, radius):
-    return row[0] ** 2 + (row[1] - radius / 2) ** 2 < (radius / 8) ** 2
+def is_in_top_circle(x, y):
+    return x**2 + (y - RADIUS / 2) ** 2 < (RADIUS / 8) ** 2
 
 
-def is_in_bottom_circle(row, radius):
-    return row[0] ** 2 + (row[1] + radius / 2) ** 2 < (radius / 8) ** 2
+def is_in_bottom_circle(x, y):
+    return x**2 + (y + RADIUS / 2) ** 2 < (RADIUS / 8) ** 2
 
 
-def is_in_top_right_section(row, radius):
-    return (row[0] > 0) & (row[0] ** 2 + (row[1] - radius / 2) ** 2 > (radius / 2) ** 2)
+def is_in_top_right_section(x, y):
+    return (x > 0) & (x**2 + (y - RADIUS / 2) ** 2 > (RADIUS / 2) ** 2)
 
 
-def is_in_bottom_left_section(row, radius):
-    return (row[0] < 0) & (row[0] ** 2 + (row[1] + radius / 2) ** 2 < (radius / 2) ** 2)
+def is_in_bottom_left_section(x, y):
+    return (x < 0) & (x**2 + (y + RADIUS / 2) ** 2 < (RADIUS / 2) ** 2)
 
 
-def label_point(row, radius):
-    if row[0] ** 2 + row[1] ** 2 > radius**2:
+def label_point(row):
+    x, y = row
+    if x**2 + y**2 > RADIUS**2:
         return 0  # Outside the main circle
-    elif is_in_top_circle(row, radius):
+    elif is_in_top_circle(x, y):
         return 1  # Small top circle
-    elif is_in_bottom_circle(row, radius):
+    elif is_in_bottom_circle(x, y):
         return 2  # Small bottom circle
-    elif is_in_top_right_section(row, radius) or is_in_bottom_left_section(row, radius):
+    elif is_in_top_right_section(x, y) or is_in_bottom_left_section(x, y):
         return 3  # Top right or bottom left section
     else:
         return 4  # Remaining sections
 
 
-def generate_yin_yang_data(n_samples, radius, test_size=None, preprocess=False):
-    # Generate random points
-    X = np.random.uniform(-radius, radius, (n_samples, 2))
-    y = np.apply_along_axis(label_point, 1, X, radius)
+def generate_yin_yang_data(n_samples, test_size=None):
+    # Yin Yang shaped data with circle radius of RADIUS
+    # centered at the origin is generated
 
-    # Preprocess data
-    if preprocess:
-        # Note: Normalization before splitting is not a good idea, but it's just for the sake of the example
-        scaler = StandardScaler()
-        X = scaler.fit_transform(X)
+    # Generate random points
+    X = np.random.uniform(-RADIUS, RADIUS, (n_samples, 2))
+    y = np.apply_along_axis(label_point, 1, X)
 
     # Split into training and testing sets
     if test_size is not None:

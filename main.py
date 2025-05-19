@@ -11,10 +11,8 @@ from src.visualization import generate_visualizations
 def main():
     np.random.seed(0)
 
-    # Generate and preprocess data
-    X_train, X_test, y_train, y_test = generate_yin_yang_data(
-        **DATA_CONFIG, preprocess=True
-    )
+    # Generate and split data
+    X_train, X_test, y_train, y_test = generate_yin_yang_data(**DATA_CONFIG)
 
     # Train and evaluate models
     print("\nTraining and evaluating models...")
