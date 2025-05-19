@@ -1,7 +1,9 @@
+import numpy as np
+from scipy.optimize import linear_sum_assignment
 from sklearn.cluster import DBSCAN, KMeans
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
@@ -14,8 +16,9 @@ from src.config import MODEL_CONFIG
 
 
 class YinYangClassifier:
-    def __init__(self, model_type, **kwargs):
+    def __init__(self, model_type, task, **kwargs):
         self.model_type = model_type
+        self.task = task
         self.kwargs = kwargs
         self.model = self._initialize_model()
 
@@ -40,20 +43,38 @@ class YinYangClassifier:
         return model_map[self.model_type](**self.kwargs)
 
     def train(self, X, y):
-        try:
-            self.model.fit(X, y)
-        except Exception as e:
-            raise RuntimeError(f"Error training {self.model_type} model: {str(e)}")
+        self.model.fit(X, y)
 
     def evaluate(self, X, y):
-        try:
-            if hasattr(self.model, "predict"):
-                y_pred = self.model.predict(X)
-            else:
-                y_pred = self.model.fit_predict(X)
-            return accuracy_score(y, y_pred)
-        except Exception as e:
-            raise RuntimeError(f"Error evaluating {self.model_type} model: {str(e)}")
+        y_pred = self.predict(X, y)
+        return accuracy_score(y, y_pred)
+
+    def predict(self, X, y):
+        if hasattr(self.model, "predict"):
+            y_pred = self.model.predict(X)
+        else:
+            y_pred = self.model.fit_predict(X)
+        if self.task == "clustering":
+            return self._label_assignment(y, y_pred)
+        else:
+            return y_pred
+
+    @staticmethod
+    def _label_assignment(y, y_pred):
+        # The labels from the clustering model will not align with labels from the dataset
+        # We use the Hungarian algorithm to find the best mapping between the two sets of labels
+        # Noisy labels i.e -1 (like in case of DBSCAN) are excluded but retained as -1
+
+        labels = np.unique(np.concatenate((y, y_pred)))
+        labels = labels[labels != -1]
+
+        cm = confusion_matrix(y, y_pred, labels=labels)
+        row_ind, col_ind = linear_sum_assignment(-cm)
+        mapping = {labels[col]: labels[row] for row, col in zip(row_ind, col_ind)}
+
+        y_pred_mapped = np.array([mapping.get(label, -1) for label in y_pred])
+
+        return y_pred_mapped
 
 
 def train_and_evaluate_models(X_train, X_test, y_train, y_test):
@@ -62,10 +83,12 @@ def train_and_evaluate_models(X_train, X_test, y_train, y_test):
     for model_config in tqdm(MODEL_CONFIG, desc="Training models"):
         try:
             model_type = model_config["model_type"]
+            task = model_config["task"]
             test_params = model_config["test_params"]
             kwargs = model_config["kwargs"]
             model = YinYangClassifier(
                 model_type,
+                task,
                 **test_params,
                 **kwargs,
             )
@@ -76,7 +99,7 @@ def train_and_evaluate_models(X_train, X_test, y_train, y_test):
                 {
                     "test_params": test_params,
                     "accuracy": model.evaluate(X_test, y_test),
-                    "model": model.model,
+                    "model": model,
                 }
             )
         except Exception as e:

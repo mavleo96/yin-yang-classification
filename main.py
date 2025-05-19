@@ -27,7 +27,7 @@ def main():
         for model_type, model_results in results.items():
             text += f"{model_type}\n"
             for model_result in model_results:
-                text += f"{model_result['model']}: {model_result['accuracy']}\n"
+                text += f"{model_result['model'].model}: {model_result['accuracy']}\n"
             text += "\n"
         f.write(text)
 

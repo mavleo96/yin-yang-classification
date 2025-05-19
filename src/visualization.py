@@ -54,10 +54,7 @@ def generate_visualizations(results, X, y):
         ):
             model = result_item["model"]
             test_params = result_item["test_params"]
-            if hasattr(model, "predict"):
-                y_pred = model.predict(X)
-            else:
-                y_pred = model.fit_predict(X)
+            y_pred = model.predict(X, y)
             y_plot = np.where(y_pred == y, y, -1)
 
             ax = plt.subplot(n_rows, n_cols, i + 1)

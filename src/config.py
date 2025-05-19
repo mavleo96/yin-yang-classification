@@ -40,6 +40,7 @@ MODEL_CONFIG = [
     *[
         {
             "model_type": "random_forest",
+            "task": "classification",
             "test_params": {
                 "max_depth": depth,
             },
@@ -53,6 +54,7 @@ MODEL_CONFIG = [
     *[
         {
             "model_type": "mlp1",
+            "task": "classification",
             "test_params": {
                 "hidden_layer_sizes": (size,),
             },
@@ -68,6 +70,7 @@ MODEL_CONFIG = [
     *[
         {
             "model_type": "mlp2",
+            "task": "classification",
             "test_params": {
                 "hidden_layer_sizes": (size, size),
             },
@@ -83,6 +86,7 @@ MODEL_CONFIG = [
     *[
         {
             "model_type": "svm",
+            "task": "classification",
             "test_params": {
                 "kernel": kernel,
                 "C": C,
@@ -98,6 +102,7 @@ MODEL_CONFIG = [
     *[
         {
             "model_type": "knn",
+            "task": "classification",
             "test_params": {
                 "n_neighbors": n_neighbors,
             },
@@ -111,6 +116,7 @@ MODEL_CONFIG = [
     *[
         {
             "model_type": "xgboost",
+            "task": "classification",
             "test_params": {
                 "max_depth": max_depth,
             },
@@ -124,6 +130,7 @@ MODEL_CONFIG = [
     *[
         {
             "model_type": "naive_bayes",
+            "task": "classification",
             "test_params": {},
             "kwargs": {},
         }
@@ -131,6 +138,7 @@ MODEL_CONFIG = [
     *[
         {
             "model_type": "kmeans",
+            "task": "clustering",
             "test_params": {
                 "n_clusters": n_clusters,
             },
@@ -143,6 +151,7 @@ MODEL_CONFIG = [
     *[
         {
             "model_type": "dbscan",
+            "task": "clustering",
             "test_params": {
                 "eps": eps,
             },
