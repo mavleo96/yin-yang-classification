@@ -13,7 +13,7 @@ I also came across an interesting paper titled ["The Yin-Yang Dataset"](https://
 
 ---
 
-## Models and Results Visualization
+## Classification Models and Results Visualization
 
 ### Random Forest Classifier
 > _it ain't much but it's honest work_
@@ -78,10 +78,12 @@ I also came across an interesting paper titled ["The Yin-Yang Dataset"](https://
 <img src="outputs/naive_bayes.png" alt="Naive Bayes" width="200">
 
 ---
+## Clustering Models and Results Visualization
+Clustering algorithms are not suited for this task / dataset but we still try to visualize their behaviour below. Assignment of clusters to labels is done by Hungarian algorithm.
 
 ### K-Means
-- **Number of Clusters**: 3 to 7
-- **Performance**: Clustering algorithm not suitable for a highly non-linear classification problem. Accuracy is highest when number of clusters is equal to number of classes.
+- **Configuration**: Varying number of clusters from 3 to 7 with `k-means++` initialization.
+- **Performance**: Clustering algorithm not suitable for a highly non-linear classification problem.
 
 <img src="outputs/kmeans.png" alt="K-Means" width="600">
 

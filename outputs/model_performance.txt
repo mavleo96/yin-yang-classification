@@ -95,14 +95,14 @@ naive_bayes
 GaussianNB(): 0.76224
 
 kmeans
-KMeans(n_clusters=3, random_state=0): 0.08136
-KMeans(n_clusters=4, random_state=0): 0.2594
-KMeans(n_clusters=5, random_state=0): 0.3692
-KMeans(n_clusters=6, random_state=0): 0.3202
-KMeans(n_clusters=7, random_state=0): 0.2832
+KMeans(n_clusters=3, random_state=0): 0.52136
+KMeans(n_clusters=4, random_state=0): 0.44164
+KMeans(n_clusters=5, random_state=0): 0.38564
+KMeans(n_clusters=6, random_state=0): 0.33824
+KMeans(n_clusters=7, random_state=0): 0.29736
 
 dbscan
-DBSCAN(eps=0.1): 0.21696
-DBSCAN(eps=0.2): 0.21696
-DBSCAN(eps=0.3): 0.21696
+DBSCAN(eps=0.1): 0.37912
+DBSCAN(eps=0.2): 0.37912
+DBSCAN(eps=0.3): 0.37912
 
